@@ -7,11 +7,8 @@ workflows:
     scripts:
       - name: Build APK
         script: |
-          flutter create --project-name daftar --org com.daftar tmp_project
-          cp -r lib tmp_project/
-          cp pubspec.yaml tmp_project/
-          cd tmp_project
+          flutter create --project-name daftar --org com.daftar .
           flutter pub get
-          flutter build apk --release --no-shrink
+          flutter build apk --release
     artifacts:
-      - tmp_project/build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.apk
