@@ -5,14 +5,13 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Create Flutter project
-        script: |
-          flutter create --project-name daftar --org com.daftar .
-          cp -r /clone/lib/* lib/
-          cp /clone/pubspec.yaml pubspec.yaml
-      - name: Get packages
-        script: flutter pub get
       - name: Build APK
-        script: flutter build apk --release --no-shrink
+        script: |
+          flutter create --project-name daftar --org com.daftar tmp_project
+          cp -r lib tmp_project/
+          cp pubspec.yaml tmp_project/
+          cd tmp_project
+          flutter pub get
+          flutter build apk --release --no-shrink
     artifacts:
-      - build/**/outputs/**/*.apk
+      - tmp_project/build/**/outputs/**/*.apk
